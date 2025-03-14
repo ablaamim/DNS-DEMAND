@@ -10,9 +10,9 @@
                                   │ Interface Wi-Fi (wlan0)
                                   │ Adresse IP: 10.44.28.100 (DHCP)
                                   │
-                 ┌────────────────┴───────────────────────┐
-                 │          Nœud Master (Contrôleur RKE2) │
-                 │ ┌───────────────────────────────────┐  │
+                 ┌────────────────┴──────────────────────┐
+                 │          Nœud Master (Contrôleur RKE2)│
+                 │ ┌───────────────────────────────────┐ │
                  │ │ MetalLB + Traefik Ingress (LB)   │  │
                  │ └──────────────────────────────────┘  │
                  │                                       │
@@ -39,6 +39,8 @@
 
 ## 1. Réseau Universitaire (UM6P) :
 
+---
+
 Ce réseau est géré directement par vous.
 Vous bénéficiez d'une adresse IP (example 10.44.28.100) attribuée dynamiquement par DHCP à travers l’interface Wi-Fi.
 
@@ -56,7 +58,7 @@ wlan0 (Wi-Fi) : Connectée directement au réseau UM6P, reçoit une adresse DHCP
 
 eth0 (LAN) : Connectée au réseau privé du cluster Kubernetes (10.50.29.10 IP statique).
 
-Le Master node utilise MetalLB pour affecter une adresse IP LoadBalancer (celle de wlan0) à vos services Kubernetes.
+Le Master node utilise MetalLB pour affecter une adresse IP LoadBalancer (celle de wlan0) à nos services Kubernetes.
 
 Traefik fonctionne en tant que contrôleur ingress et route les requêtes entrantes aux applications déployées dans votre cluster.
 
@@ -66,6 +68,9 @@ Aucun accès direct depuis l'extérieur sauf via le Master node (point d’entr�
 Tous les autres nœuds (Nodes 2 à 7) utilisent des adresses IP statiques privées pour des raisons de sécurité interne.
 
 📌 Exemple concret d’utilisation (DNS) :
+
+---
+
 Supposons que vous avez une application React exposée par Traefik :
 
 DNS :
@@ -84,6 +89,8 @@ L’utilisation du LoadBalancer via MetalLB est strictement contrôlée par votr
 Les DNS fournis par l’université redirigent exclusivement vers une seule IP sécurisée par nos propres mécanismes (ingress, RBAC, TLS), minimisant le risque.
 
 ### 📌 Conclusion :
+
+---
 
 Cette architecture ne compromet pas la sécurité du réseau universitaire, car elle utilise :
 
