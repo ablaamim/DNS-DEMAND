@@ -42,9 +42,10 @@
 ---
 
 Ce réseau est géré directement par vous.
-Vous bénéficiez d'une adresse IP (example 10.44.28.100) attribuée dynamiquement par DHCP à travers notre interface Wi-Fi.
+nous bénéficions d'une adresse IP (example 10.44.28.100) attribuée dynamiquement par DHCP à travers notre interface Wi-Fi.
 
 L'administration réseau de l'université fournit des entrées DNS, notamment :
+
 cloud.cc.um6p.ma → 10.44.28.100
 Entrée wildcard DNS : *.cloud.cc.um6p.ma → 10.44.28.100.
 Ces entrées permettent d'accéder facilement à vos services Kubernetes via des noms DNS explicites plutôt que des adresses IP brutes.
@@ -72,7 +73,7 @@ Tous les autres nœuds (Nodes 2 à 7) utilisent des adresses IP statiques privé
 
 ---
 
-Supposons que vous avez une application React exposée par Traefik :
+Supposons que nous avons une application React exposée par Traefik :
 
 DNS :
 ```
