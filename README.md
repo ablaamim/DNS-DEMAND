@@ -8,7 +8,7 @@
 │ DNS wildcard (*.cloud.cc.um6p.ma) → 10.44.28.x                       │
 └─────────────────────────────────┬────────────────────────────────────┘
                                   │ Interface Wi-Fi (wlan0)
-                                  │ Adresse IP: 10.44.28.100 (DHCP)
+                                  │ Adresse IP: 10.44.28.100 par example (DHCP)
                                   │
                  ┌────────────────┴──────────────────────┐
                  │          Nœud Master (Contrôleur RKE2)│
@@ -24,7 +24,7 @@
                  └───────────────────┬───────────────────┘
                                    │
              ┌─────────────────────┴─────────────────────────┐
-             │       Réseau privé interne du Cluster         │
+             │       Réseau privé interne du Cluster k8s     │
              │             (LAN : 10.50.29.0/24)             │
              │                                               │
   ┌──────────┴───────┐ ┌──────────┴───────┐ ┌─────────── ┐   │
@@ -42,7 +42,7 @@
 ---
 
 Ce réseau est géré directement par vous.
-Vous bénéficiez d'une adresse IP (example 10.44.28.100) attribuée dynamiquement par DHCP à travers l’interface Wi-Fi.
+Vous bénéficiez d'une adresse IP (example 10.44.28.100) attribuée dynamiquement par DHCP à travers notre interface Wi-Fi.
 
 L'administration réseau de l'université fournit des entrées DNS, notamment :
 cloud.cc.um6p.ma → 10.44.28.100
@@ -63,6 +63,7 @@ Le Master node utilise MetalLB pour affecter une adresse IP LoadBalancer (celle 
 Traefik fonctionne en tant que contrôleur ingress et route les requêtes entrantes aux applications déployées dans votre cluster.
 
 ## 3. LAN Privé (Cluster Kubernetes) :
+
 Réseau interne isolé utilisé exclusivement par les nœuds Kubernetes (10.50.29.0/24).
 Aucun accès direct depuis l'extérieur sauf via le Master node (point d’entrée unique).
 Tous les autres nœuds (Nodes 2 à 7) utilisent des adresses IP statiques privées pour des raisons de sécurité interne.
@@ -85,7 +86,7 @@ reactAPP.cloud.cc.um6p.ma → 10.44.28.100
 
 ## Pourquoi les autres utilisateurs ne peuvent pas compromettre notre réseau facilement ?
 Les adresses IP internes (10.50.29.0/24) ne sont pas routables depuis l’extérieur (UM6P Wi-Fi), rendant impossible l’accès direct.
-L’utilisation du LoadBalancer via MetalLB est strictement contrôlée par votre Master node uniquement, rendant toute attaque directe sur les nœuds internes impossible depuis le réseau extérieur.
+L’utilisation du LoadBalancer via MetalLB est strictement contrôlée par notre Master node uniquement, rendant toute attaque directe sur les nœuds internes impossible depuis le réseau extérieur.
 Les DNS fournis par l’université redirigent exclusivement vers une seule IP sécurisée par nos propres mécanismes (ingress, RBAC, TLS), minimisant le risque.
 
 ### 📌 Conclusion :
@@ -96,4 +97,4 @@ Cette architecture ne compromet pas la sécurité du réseau universitaire, car 
 
 Une zone isolée (LAN privé Kubernetes).
 Une interface unique exposée avec contrôles sécurisés.
-Une administration DNS par l’université vous-même, ce qui empêche les utilisateurs externes ou malveillants de détourner facilement les accès vers votre réseau ou vos services internes.
+Une administration DNS par l’université vous-même, ce qui empêche les utilisateurs externes ou malveillants de détourner facilement les accès vers votre réseau ou nos services internes.
