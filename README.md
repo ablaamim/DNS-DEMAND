@@ -12,7 +12,7 @@
                                   │
                  ┌────────────────┴──────────────────────┐
                  │          Nœud Master (Contrôleur RKE2)│
-                 │ ┌───────────────────────────────────┐ │
+                 │ ┌──────────────────────────────────┐  │
                  │ │ MetalLB + Traefik Ingress (LB)   │  │
                  │ └──────────────────────────────────┘  │
                  │                                       │
@@ -61,7 +61,7 @@ eth0 (LAN) : Connectée au réseau privé du cluster Kubernetes (10.50.29.10 IP 
 
 Le Master node utilise MetalLB pour affecter une adresse IP LoadBalancer (celle de wlan0) à nos services Kubernetes.
 
-Traefik fonctionne en tant que contrôleur ingress et route les requêtes entrantes aux applications déployées dans votre cluster.
+Traefik fonctionne en tant que contrôleur ingress et route les requêtes entrantes aux applications déployées dans notre cluster.
 
 ## 3. LAN Privé (Cluster Kubernetes) :
 
@@ -86,9 +86,14 @@ reactAPP.cloud.cc.um6p.ma → 10.44.28.100
 ```
 
 ## Pourquoi les autres utilisateurs ne peuvent pas compromettre notre réseau facilement ?
+
 Les adresses IP internes (10.50.29.0/24) ne sont pas routables depuis l’extérieur (UM6P Wi-Fi), rendant impossible l’accès direct.
 L’utilisation du LoadBalancer via MetalLB est strictement contrôlée par notre Master node uniquement, rendant toute attaque directe sur les nœuds internes impossible depuis le réseau extérieur.
 Les DNS fournis par l’université redirigent exclusivement vers une seule IP sécurisée par nos propres mécanismes (ingress, RBAC, TLS), minimisant le risque.
+
+## Quelle type d'utilisateurs que nous acceuillons ?
+
+entre 6 et 10 utilisareurs internes, chefs de departements / professeurs chercheurs / managers.
 
 ### 📌 Conclusion :
 
